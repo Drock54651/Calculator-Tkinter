@@ -12,11 +12,6 @@ class Calculator(ctk.CTk):
 		super().__init__(fg_color = (WHITE,BLACK))
 
 		#* SETUP
-		#TODO: set appearance to dark or light depending on is_dark
-		#TODO: fg_color = white or black depending on dark or light
-		#TODO: get the start window size from settings and disable window Resizing
-		#TODO: Hide the title and icon
-		
 		ctk.set_appearance_mode(f'{"dark" if is_dark else "light"}')
 		self.geometry(f'{APP_SIZE[0]}x{APP_SIZE[1]}')
 		self.resizable(False, False)
@@ -24,11 +19,16 @@ class Calculator(ctk.CTk):
 		self.iconbitmap('1 window/empty.ico')
 		self.title_bar_color(is_dark)
 		
-		#* LAYOUT
+		#* GRID LAYOUT
 		self.rowconfigure(list(range(MAIN_ROWS)), weight = 1, uniform = 'a')
 		self.columnconfigure(list(range(MAIN_COLUMNS)), weight = 1, uniform = 'a')
 		
+		#* DATA
+		self.formula_string = ctk.StringVar()
+		self.result_string = ctk.StringVar(value = '0')
 
+		#* WIDGETS
+		self.create_widgets()
 
 
 		
@@ -51,11 +51,24 @@ class Calculator(ctk.CTk):
 			pass
 
 
+	def create_widgets(self):
+		
+		#* FONTS
+		main_font = ctk.CTkFont(family = FONT, size = NORMAL_FONT_SIZE)
+		result_font = ctk.CTkFont(family = OUTPUT_FONT_SIZE, size = OUTPUT_FONT_SIZE)
 
-class OutputLable(ctk.CTkLabel):
-	def __init__(self, parent, row):
-		super().__init__(parent, text = '123')
-		self.grid(row = 0, column = 0, columnspan = 4)
+		#* OUTPUT LABELS
+		OutputLable(self, 0, 'se', main_font, self.formula_string) #! formula
+		OutputLable(self, 1, 'e', result_font, self.result_string) #! result
+
+
+class OutputLable(ctk.CTkLabel): #! Shows formula and also result output from formula
+	def __init__(self, parent, row, anchor, font, string_var):
+		super().__init__(parent, textvariable = string_var, font = font)
+		self.grid(row = row, column = 0, columnspan = 4, sticky = anchor, padx = 10)
+
+		#TODO: update the class to control which corner the label is attached to 
+		#! added anchor parameter and changed OUTPUT LABELS section
 
 
 if __name__ == '__main__':
