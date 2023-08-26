@@ -38,7 +38,7 @@ OPERATORS = {
 	'invert':  {'col': 1, 'row': 2, 'text': '', 'image path': {'light': 'images/invert_light.png', 'dark': 'images/invert_dark.png'}},
 	'percent': {'col': 2, 'row': 2, 'text': '%', 'image path': None}}
 
-COLORS = {
+COLORS = { #! tuple for colors as 1st index accounts for light mode, 2nd for darkmode
 	'light-gray': {'fg': ('#505050','#D4D4D2'), 'hover': ('#686868','#efefed'), 'text': ('white','black')},
 	'dark-gray': {'fg': ('#D4D4D2', '#505050'), 'hover': ('#efefed','#686868'), 'text': ('black','white')},
 	'orange': {'fg': '#FF9500', 'hover': '#ffb143', 'text': ('black','white')},
