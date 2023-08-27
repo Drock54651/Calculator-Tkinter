@@ -1,7 +1,8 @@
 import customtkinter as ctk
 import darkdetect
 from settings import *
-from buttons import Button
+from PIL import Image, ImageTk
+from buttons import Button, ImageButton
 try:
 	from ctypes import windll, byref, sizeof, c_int
 except:
@@ -71,7 +72,6 @@ class Calculator(ctk.CTk):
 		font = main_font)
 		
 		#* PERCENTAGE BUTTON
-		#TODO: create this
 		Button(parent = self, 
 		text = OPERATORS['percent']['text'], 
 		func = self.percent,
@@ -79,12 +79,29 @@ class Calculator(ctk.CTk):
 		row = OPERATORS['percent']['row'],
 		font = main_font)
 
+		#* INVERT BUTTON
+		#TODO: import the image and create the image button
+		invert_image = ctk.CTkImage(dark_image = Image.open(OPERATORS['invert']['image path']['light']), 
+			      					light_image = Image.open(OPERATORS['invert']['image path']['dark']))
+		
+
+		#invert_image_tk = ImageTk.PhotoImage(invert_image)
+		ImageButton(parent  = self, 
+	      image = invert_image, 
+		  func = self.invert, 
+		  row = OPERATORS['invert']['row'], 
+		  col = OPERATORS['invert']['col'],
+		  text  = OPERATORS['invert']['text'])
+		
+
 	def clear(self):
 		print('clear')
 
 	def percent(self):
 		print('percent')
 
+	def invert(self):
+		print('invert')
 class OutputLable(ctk.CTkLabel): #! Shows formula and also result output from formula
 	def __init__(self, parent, row, anchor, font, string_var):
 		super().__init__(parent, textvariable = string_var, font = font)
