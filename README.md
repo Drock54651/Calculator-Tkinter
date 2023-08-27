@@ -1,2 +1,2 @@
 # Calculator
-For the calculator to work, must have buttons.py, and settings.py, as well as empty.ico, as well as tkinter libraries.
+For the calculator to work, must have buttons.py, settings.py, empty.ico, as well as tkinter libraries.
